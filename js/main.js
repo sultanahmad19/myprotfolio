@@ -15,6 +15,7 @@ jQuery(function($) {
 	siteIstotope();
 	portfolioItemClick();
 	owlCarouselPlugin();
+		skillsMarqueeToggle();
 	floatingLabel();
 	scrollWindow();
 	counter();
@@ -247,46 +248,6 @@ var owlCarouselPlugin = function() {
 	   });
 	}
 
-	if ( $('.skills-slider').length ) {
-
-		$('.skills-slider').owlCarousel({
-			center: false,
-	    loop: true,
-	    stagePadding: 20,
-	    margin: 40,
-	    smartSpeed: 600,
-	    autoplay: true,
-	    autoplayTimeout: 2000,
-	    autoplayHoverPause: true,
-	    dots: true,
-	    nav: true,
-	    navText: ['<span class="icon-keyboard_arrow_left">', '<span class="icon-keyboard_arrow_right">'],
-	    responsive:{
-		    400:{
-		      items: 2,
-		      stagePadding: 20,
-		      margin: 20,
-		      autoplayTimeout: 2000,
-		      smartSpeed: 600
-		    },
-		    768:{
-		    	items: 3,
-		      stagePadding: 30,
-		      margin: 30,
-		      autoplayTimeout: 2000,
-		      smartSpeed: 600
-		    },
-		    1000:{
-		    	items: 4,
-		      stagePadding: 40,
-		      margin: 40,
-		      autoplayTimeout: 2000,
-		      smartSpeed: 600
-		    }
-	    }
-	   });
-	}
-
 };
 
 var owlSingleSlider = function () {
@@ -326,6 +287,24 @@ var floatingLabel = function () {
 	  } else {
 	    $field.removeClass('field--not-empty');
 	  }
+	});
+};
+
+var skillsMarqueeToggle = function () {
+	var $marquee = $('.skills-marquee');
+	var $toggle = $('.skills-toggle');
+	if (!$marquee.length || !$toggle.length) {
+		return;
+	}
+
+	var showLabel = $toggle.data('label-show') || 'View all skills';
+	var hideLabel = $toggle.data('label-hide') || 'Back to animation';
+
+	$toggle.on('click', function () {
+		var isPaused = $marquee.toggleClass('is-paused').hasClass('is-paused');
+		$(this)
+			.attr('aria-pressed', isPaused)
+			.text(isPaused ? hideLabel : showLabel);
 	});
 };
 
