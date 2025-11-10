@@ -530,6 +530,9 @@ var loadPortfolioSinglePage = function(id, href) {
 				TweenMax.to('.portfolio-single-inner', .5, { marginTop: '0px', autoAlpha: 1, display: 'block', onComplete() {
 
 					TweenMax.to('.loader-portfolio-wrap', 1, { top: '0px', autoAlpha: 0, ease: Power4.easeOut });	
+					if (typeof AOS !== 'undefined' && AOS.refresh) {
+						AOS.refresh();
+					}
 				} });
 			}, 700 );
 		}
